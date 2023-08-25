@@ -21,10 +21,14 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies and build web app
-        run: |
-          npm ci
-          npm run build:web
+      - name: Install React dependencies
+        run: npm ci
+
+      - name: Update Browserslist DB
+        run: npx update-browserslist-db@latest
+
+      - name: Build React App
+        run: npm run build:web
 
       - name: Deploy to Azure Static Web App
         uses: Azure/static-web-apps-deploy@v1
