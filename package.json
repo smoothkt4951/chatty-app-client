@@ -76,7 +76,7 @@
     "electron-build:windows": "electron-builder --windows",
     "electron-build:linux": "electron-builder --linux",
     "build": "npm run react-build && npm run electron-build",
-    "build:web": "react-scripts build",
+    "build:web": "cross-env CI=false react-scripts build",
     "build:mac": "npm run react-build && electron-builder --mac",
     "build:windows": "npm run react-build && electron-builder --windows",
     "build:linux": "npm run react-build && electron-builder --linux",
