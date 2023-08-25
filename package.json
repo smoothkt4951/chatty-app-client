@@ -66,7 +66,6 @@
     "wait-on": "^7.0.1"
   },
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
     "react-start": "PORT=3001 react-scripts start",
     "react-build": "cross-env CI=false react-scripts build",
     "react-test": "react-scripts test",
