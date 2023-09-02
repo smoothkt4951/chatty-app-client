@@ -22,8 +22,19 @@ const Sidebar = () => {
         setIsPending(true);
         const fetchChannels = async () => {
             const result = await getChannelsByUser(user?.id!);
-            setChannels(result.channels);
             setLastMessages(result.lastMessages);
+
+            // Sort channels by latest message timestamp
+            const sortedChannels = [...result.channels].sort((a, b) => {
+                const aLastMessage = result.lastMessages.find((msg: { channelId: any; }) => msg?.channelId === a?.id);
+                const bLastMessage = result.lastMessages.find((msg: { channelId: any; }) => msg?.channelId === b?.id);
+
+                const aTimestamp = aLastMessage ? new Date(aLastMessage.createdAt).getTime() : 0;
+                const bTimestamp = bLastMessage ? new Date(bLastMessage.createdAt).getTime() : 0;
+
+                return bTimestamp - aTimestamp; // For descending order
+            });
+            setChannels(sortedChannels);
             setIsPending(false);
         };
 
@@ -50,6 +61,7 @@ const Sidebar = () => {
                             channels.length > 0
                                 ?
                                 channels.map((channel, index) => {
+
                                     return (
                                         <ChannelBox
                                             key={channel.id}

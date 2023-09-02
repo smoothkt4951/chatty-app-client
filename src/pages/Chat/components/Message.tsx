@@ -30,6 +30,7 @@ const Message: FC<Props> = ({ message }) => {
             className={`
                 rounded-md w-fit p-3 m-3 flex flex-col relative group
                 ${message.userId === user?.id ? 'bg-cyan-600 ml-auto' : 'dark:bg-neutral-900 bg-neutral-100'}
+                ${ (message.images && message.images!.length > 0 && !deleted && !message.text) && `bg-transparent`}
             `}
         >
             {
@@ -58,7 +59,7 @@ const Message: FC<Props> = ({ message }) => {
                     return (
                         <LazyLoadImage
                             key={index}
-                            className='w-auto h-52 object-contain mb-2 mx-auto rounded-md'
+                            className='w-auto h-52 object-contain mb-2 mx-auto'
                             effect='blur'
                             src={image}
                             alt="message"

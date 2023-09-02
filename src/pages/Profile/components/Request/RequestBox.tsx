@@ -117,29 +117,21 @@ const RequestBox: FC<Props> = ({ request, setTrigger }) => {
 
                     {
                         !requestHandled
-                            ?
-                            <>
-                                {
-                                isFriend
-                                    ?
-                                    <>
+                            ? (
+                                <>
+                                    {isFriend && (
                                         <button
                                             onClick={handleClickMessage}
                                             className="font-semibold text-xl px-3 py-2 bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 hover:bg-neutral-400 duration-200 rounded-md mt-3 mr-3"
                                         >
                                             <BiMessageDots className="mx-auto text-3xl" />
                                         </button>
-                                    </> : {
-
-                                    }
-                                }
-                            </>
-                            : (
-                            <>
-                                <IconButton isTextCanClosed Icon={BsCheck2} text='Accept' type="button" handleClick={handleAccept} />
-                                <IconButton isTextCanClosed Icon={RxCross2} text='Decline' type="button" handleClick={handleDecline} />
-                            </>
-                        )
+                                    )}
+                                    <IconButton isTextCanClosed Icon={BsCheck2} text='Accept' type="button" handleClick={handleAccept} />
+                                    <IconButton isTextCanClosed Icon={RxCross2} text='Decline' type="button" handleClick={handleDecline} />
+                                </>
+                            )
+                            : null
                     }
                     {
                         isBlocked

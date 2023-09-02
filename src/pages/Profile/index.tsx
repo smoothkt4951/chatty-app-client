@@ -4,10 +4,13 @@ import PageInfo from "../../components/layout/ContentArea/PageInfo";
 import { getUser } from "../../services/userService";
 import Info from "./components/Info";
 import Tabs from "./components/Tabs";
+import {useSelector} from "react-redux";
+import {RootState} from "../../redux/store";
 
 const Profile = () => {
     const location = useLocation();
     const [profileInfo, setProfileInfo] = useState<User>();
+    const loggedUser = useSelector((state: RootState) => state.auth.user);
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -19,7 +22,10 @@ const Profile = () => {
 
     return (
         <section>
-            <PageInfo isChannel={false} name={`${profileInfo?.username}'s Profile`} />
+            <PageInfo
+                isChannel={false}
+                name={`${loggedUser ? loggedUser?.username : profileInfo?.username}'s Profile`}
+            />
             <Info details={profileInfo!} />
             <Tabs profileId={location.state.userId} />
         </section>
